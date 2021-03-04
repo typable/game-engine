@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="author" content="typable">
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<meta name="robots" content="noindex, nofollow">
+		<meta name="google" content="notranslate">
+		<title>git.typable</title>
+		<link href="/asset/favicon.png" rel="shortcut icon" type="image/png">
+		<link href="/css/style.css" rel="stylesheet">
+		<script src="/js/index.js" type="module"></script>
+	</head>
+	<body>
+		<header class="container-fluid">
+			<div class="row">
+				<div class="container">
+					<h1>git.typable</h1>
+					<p>A place for commonly used code snippets.</p>
+				</div>
+			</div>
+		</header>
+		<main class="container-fluid">
+			<div class="row">
+				<div class="container">
+					<article>
+						<label>Game</label>
+						<pre>Game(width, height, { fps })</pre>
+						<p>By extending the Game class you have access to a newly created canvas with game loop, which calls the update and render methods.</p>
+						<code><pre>import { Game } from 'https://git.typable.dev/std/js/game.js';</pre></code>
+						<code><pre>class DinoGame extends Game {
+	constructor() {
+		super(900, 600); // (width, height)
+		this.point = { x: 100, y: 100 };
+	}
+	update() {
+		this.point.x += 1;
+	}
+	render() {
+		super.render(); // screen clear
+		let { x, y } = this.point;
+		this.g.fillRect(x, y, 50, 50);
+	}
+}
+
+const game = new DinoGame();
+document.body.append(game.canvas);
+
+game.start();</pre></code>
+						<!--
+						<h3>update</h3>
+						<p>Method for update related purposes.</p>
+						<h3>render</h3>
+						<p>Method for render related purposes.</p>
+						<h3>start</h3>
+						<p>Starts the game loop.</p>
+						-->
+					</article>
+					<article>
+						<label>scaleCanvas</label>
+						<pre>scaleCanvas(canvas, width, height)</pre>
+						<p>Scales a canvas to the device related pixel ratio.</p>
+						<code><pre>import { scaleCanvas } from 'https://git.typable.dev/std/js/canvas.js';</pre></code>
+						<code><pre>const canvas = document.createElement('canvas');
+scaleCanvas(canvas, 900, 600); // (width, height)
+document.body.append(canvas);</pre></code>
+				</div>
+			</div>
+		</main>
+		<footer class="container-fluid">
+			<div class="row">
+				<div class="container">
+					<span>&copy; typable 2021</span>
+					<a href="https://typable.dev/imprint">Imprint</a>
+					<a href="https://typable.dev/terms">Terms</a>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>
