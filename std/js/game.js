@@ -14,7 +14,7 @@ export class Game {
 		requestAnimationFrame(this.loop.bind(this));
 		this.update();
 		this.g.save();
-		this.render(),
+		this.render(this.g),
 		this.g.restore();
 	}
 	loop() {
@@ -25,7 +25,7 @@ export class Game {
 			this.then = this.now - (this.elapsed % this.fps);
 			this.update();
 			this.g.save();
-			this.render(),
+			this.render(this.g),
 			this.g.restore();
 		}
 	}
@@ -34,5 +34,50 @@ export class Game {
 	}
 	render() {
 		this.g.clearRect(0, 0, this.width, this.height);
+	}
+}
+
+export class Group {
+	constructor() {
+		this.items = [];
+	}
+	update() {
+		for(let item of this.items) {
+			item.update();
+		}
+	}
+	render(g) {
+		for(let item of this.items) {
+			g.save();
+			item.render(g);
+			g.restore();
+		}
+	}
+	add(item) {
+		this.items.push(item);
+	}
+	get() {
+		return this.items;
+	}
+}
+
+export class Surface {
+	constructor(x, y, width, height) {
+		this.rect = new Rect(x, y, width, height);
+	}
+	update() {
+		// empty
+	}
+	render() {
+		// empty
+	}
+}
+
+export class Rect {
+	constructor(x, y, width, height) {
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
 	}
 }

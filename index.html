@@ -25,23 +25,41 @@
 		<main class="container-fluid">
 			<div class="row">
 				<div class="container">
+					<h3>Overview</h3>
+					<ul class="overview">
+						<li>
+							<a href="#game">Game</a>
+						</li>
+						<li>
+							<a href="#group">Group</a>
+						</li>
+						<li>
+							<a href="#surface">Surface</a>
+						</li>
+						<li>
+							<a href="#rect">Rect</a>
+						</li>
+						<li>
+							<a href="#scaleCanvas">scaleCanvas</a>
+						</li>
+					</ul>
 					<article>
-						<label>Game</label>
+						<label><a name="game">Game</a></label>
 						<pre>Game(width, height, { fps })</pre>
 						<p>By extending the Game class you have access to a newly created canvas with game loop, which calls the update and render methods.</p>
 						<code><pre>import { Game } from 'https://git.typable.dev/std/js/game.js';</pre></code>
 						<code><pre>class DinoGame extends Game {
 	constructor() {
-		super(900, 600); // (width, height)
+		super(900, 600);
 		this.point = { x: 100, y: 100 };
 	}
 	update() {
 		this.point.x += 1;
 	}
-	render() {
+	render(g) {
 		super.render(); // screen clear
-		let { x, y } = this.point;
-		this.g.fillRect(x, y, 50, 50);
+		const { x, y } = this.point;
+		g.fillRect(x, y, 50, 50);
 	}
 }
 
@@ -49,17 +67,44 @@ const game = new DinoGame();
 document.body.append(game.canvas);
 
 game.start();</pre></code>
-						<!--
-						<h3>update</h3>
-						<p>Method for update related purposes.</p>
-						<h3>render</h3>
-						<p>Method for render related purposes.</p>
-						<h3>start</h3>
-						<p>Starts the game loop.</p>
-						-->
 					</article>
 					<article>
-						<label>scaleCanvas</label>
+						<label><a name="group">Group</a></label>
+						<pre>Group()</pre>
+						<p>Can be used to group specific elements for update and rendering purposes.</p>
+						<code><pre>import { Group } from 'https://git.typable.dev/std/js/game.js';</pre></code>
+						<code><pre>const group = new Group();
+group.add(...);
+
+group.update();
+group.render(g);</pre></code>
+					</article>
+					<article>
+						<label><a name="surface">Surface</a></label>
+						<pre>Surface(x, y, width, height)</pre>
+						<p>Represents a rectangular surface with its own update and render method.</p>
+						<code><pre>import { Surface } from 'https://git.typable.dev/std/js/game.js';</pre></code>
+						<code><pre>class Player extends Surface {
+	constructor(x, y) {
+		super(x, y, 50, 50);
+	}
+	update() {
+		this.rect.x += 1;
+	}
+	render(g) {
+		const { x, y, width, height } = this.rect;
+		g.fillRect(x, y, width, height);
+	}
+}</pre></code>
+					</article>
+					<article>
+						<label><a name="rect">Rect</a></label>
+						<pre>Rect(x, y, width, height)</pre>
+						<p>Represents a rectangular hitbox.</p>
+						<code><pre>import { Rect } from 'https://git.typable.dev/std/js/game.js';</pre></code>
+					</article>
+					<article>
+						<label><a name="scaleCanvas">scaleCanvas</a></label>
 						<pre>scaleCanvas(canvas, width, height)</pre>
 						<p>Scales a canvas to the device related pixel ratio.</p>
 						<code><pre>import { scaleCanvas } from 'https://git.typable.dev/std/js/canvas.js';</pre></code>
