@@ -28,21 +28,41 @@
 					<h3>Overview</h3>
 					<ul class="overview">
 						<li>
-							<a href="#game">Game</a>
+							<p>JavaScript</p>
+							<ul>
+								<li>
+									<a href="#game">Game</a>
+								</li>
+								<li>
+									<a href="#group">Group</a>
+								</li>
+								<li>
+									<a href="#surface">Surface</a>
+								</li>
+								<li>
+									<a href="#rect">Rect</a>
+								</li>
+								<li>
+									<a href="#scaleCanvas">scaleCanvas</a>
+								</li>
+							</ul>
 						</li>
 						<li>
-							<a href="#group">Group</a>
-						</li>
-						<li>
-							<a href="#surface">Surface</a>
-						</li>
-						<li>
-							<a href="#rect">Rect</a>
-						</li>
-						<li>
-							<a href="#scaleCanvas">scaleCanvas</a>
+							<p>CSS</p>
+							<ul>
+								<li>
+									<a href="#normalize">Normalize</a>
+								</li>
+								<li>
+									<a href="#color">Color</a>
+								</li>
+								<li>
+									<a href="#icons">Icons</a>
+								</li>
+							</ul>
 						</li>
 					</ul>
+					<h2>JavaScript</h2>
 					<article>
 						<label><a name="game">Game</a></label>
 						<pre>Game(width, height, { fps })</pre>
@@ -111,6 +131,45 @@ group.render(g);</pre></code>
 						<code><pre>const canvas = document.createElement('canvas');
 scaleCanvas(canvas, 900, 600); // (width, height)
 document.body.append(canvas);</pre></code>
+					</article>
+					<h2>CSS</h2>
+					<article>
+						<label><a name="normalize">Normalize</a></label>
+						<p>Normalizes spacing and interactive elements and adds additional alignment classes.</p>
+						<code><pre>@import url('https://git.typable.dev/std/less/normalize.less');</pre></code>
+						<p>Following variables are required (insert before import):</p>
+						<code><pre>@gap: px - Space between column elements
+@full-width: px - Maximum width for centered container elements</pre></code>
+						<p>Additional alignment classes:</p>
+						<code><pre>.col - Horizontal spacing
+.row - Inverts horziontal spacing
+.container - Align centered with horizontal spacing
+.container-fluid - Align full width with horizontal spacing</pre></code>
+<p>Structure:</p>
+<code><pre>.container-fluid {
+	.row {
+		.container {
+			...
+		}
+	}
+}</pre></code>
+					</article>
+					<article>
+						<label><a name="color">Color</a></label>
+						<pre>@color-{color}[-(50,100,200,300,400,500,600,700,800,900)]</pre>
+						<p>A collection of material colors inspired by the Google Material Colors.</p>
+						<code><pre>@import url('https://git.typable.dev/std/less/color.less');</pre></code>
+						<code><pre>@color-black;
+@color-teal-50;
+@color-blue-500;</pre></code>
+					</article>
+					<article>
+						<label><a name="icons">Icons</a></label>
+						<pre>.ico</pre>
+						<p>Imports the Google Material Icons Fonts.</p>
+						<code><pre>@import url('https://git.typable.dev/std/less/icons.less');</pre></code>
+						<code><pre>&lt;span class="ico"&gt;close&lt;/span&gt;</pre></code>
+					</article>
 				</div>
 			</div>
 		</main>
