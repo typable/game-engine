@@ -20,7 +20,8 @@ export function html(strings, ...props) {
 				if(props[i] instanceof Array) {
 					for(const item of props[i]) {
 						if(item instanceof HTMLElement) {
-							code += `<div data-child-ref="${children.length}"></div>`;
+							const tag = item.tagName.toLowerCase();
+							code += `<${tag} data-child-ref="${children.length}"></${tag}>`;
 							children.push(item);
 							continue;
 						}
@@ -29,7 +30,8 @@ export function html(strings, ...props) {
 					continue;
 				}
 				if(props[i] instanceof HTMLElement) {
-					code += `<div data-child-ref="${children.length}"></div>`;
+					const tag = props[i].tagName.toLowerCase();
+					code += `<${tag} data-child-ref="${children.length}"></${tag}>`;
 					children.push(props[i]);
 					continue;
 				}
@@ -48,11 +50,22 @@ export function html(strings, ...props) {
 			else {
 				target = element.querySelector(`[data-event-ref="${id}"]`);
 			}
-			target.addEventListener(type, handler);
-			target.removeAttribute('data-event-ref');
+			if(target) {
+				target.addEventListener(type, handler);
+				target.removeAttribute('data-event-ref');
+			}
+			else {
+				console.warn(`Unable to bind ${type} event to element with id: ${id}`);
+			}
 		}
 		for(const [id, child] of Object.entries(children)) {
-			element.querySelector(`[data-child-ref="${id}"]`).replaceWith(child);
+			const target = element.querySelector(`[data-child-ref="${id}"]`);
+			if(target) {
+				target.replaceWith(child);
+			}
+			else {
+				console.warn(`Unable to reference <${child.tagName.toLowerCase()}> tag with id: ${id}`);
+			}
 		}
 		return element;
 	}

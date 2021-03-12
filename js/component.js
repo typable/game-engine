@@ -41,14 +41,13 @@ export const Category = props => {
 };
 
 export const Post = props => {
-	const url = 'https://git.typable.dev/std' + props.url;
 	return html`<article data-id="${props.id}">
 		<label>${props.name}</label>
 		${props.syntax ? `<pre>${escape(props.syntax)}</pre>` : ''}
 		<p>${props.description}</p>
 		<code>
-			<pre>${escape(url)}</pre>
-			${CopyButton({ value: url })}
+			<pre>${escape(props.import)}</pre>
+			${CopyButton({ value: props.import })}
 		</code>
 		${props.code ? (
 			html`<code>
