@@ -5,6 +5,31 @@
 		"url": "/js",
 		"posts": [
 			{
+				"id": "js.html",
+				"name": "html",
+				"syntax": "html`...`",
+				"description": "Creates a DOM element from the given template literal.",
+				"url": "/js/render.js",
+				"code": [
+					"const Message = props => {",
+					"\treturn html`<h1>${props.text}</h1>`;",
+					"};",
+					"",
+					"const message = Message({ text: 'Hello World!' });",
+					"document.body.append(message);"
+				]
+			},
+			{
+				"id": "js.escape",
+				"name": "escape",
+				"syntax": "escape(...)",
+				"description": "Returns escape xml from the given string.",
+				"url": "/js/render.js",
+				"code": [
+					"escape(`<h1>Hello World!</h1>`);"
+				]
+			},
+			{
 				"id": "js.game",
 				"name": "Game",
 				"syntax": "Game(width, height, { fps })",
