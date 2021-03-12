@@ -1,0 +1,141 @@
+[
+	{
+		"id": "js",
+		"name": "JavaScript",
+		"url": "/js",
+		"posts": [
+			{
+				"id": "js.game",
+				"name": "Game",
+				"syntax": "Game(width, height, { fps })",
+				"description": "By extending the Game class you have access to a newly created canvas with game loop, which calls the update and render methods.",
+				"url": "/js/game.js",
+				"code": [
+					"class DinoGame extends Game {",
+					"\tconstructor() {",
+					"\t\tsuper(900, 600);",
+					"\t\tthis.point = { x: 100, y: 100 };",
+					"\t}",
+					"\tupdate() {",
+					"\t\tthis.point.x += 1;",
+					"\t}",
+					"\trender(g) {",
+					"\t\tsuper.render(g); // clear screen",
+					"\t\tconst {x, y} = this.point;",
+					"\t\tg.fillRect(x, y, 50, 50);",
+					"\t}",
+					"}",
+					"",
+					"const game = new DinoGame();",
+					"document.body.append(game.canvas);",
+					"",
+					"game.start();"
+				]
+			},
+			{
+				"id": "js.surface",
+				"name": "Surface",
+				"syntax": "Surface(x, y, width, height)",
+				"description": "Represents a rectangular surface with its own update and render method.",
+				"url": "/js/game.js",
+				"code": [
+					"class Player extends Surface {",
+					"\tconstructor(x, y) {",
+					"\t\tsuper(x, y, 50, 50);",
+					"\t}",
+					"\tupdate() {",
+					"\t\tthis.rect.x += 1;",
+					"\t}",
+					"\trender(g) {",
+					"\t\tconst {x, y, width, height} = this.rect;",
+					"\t\tg.fillRect(x, y, width, height);",
+					"\t}",
+					"}"
+				]
+			},
+			{
+				"id": "js.group",
+				"name": "Group",
+				"syntax": "Group()",
+				"description": "Can be used to group specific elements for update and rendering purposes.",
+				"url": "/js/game.js",
+				"code": [
+					"const group = new Group();",
+					"group.add(...);",
+					"",
+					"group.update();",
+					"group.render(g);"
+				]
+			},
+			{
+				"id": "js.rect",
+				"name": "Rect",
+				"syntax": "Rect(x, y, width, height)",
+				"description": "Represents a rectangular hitbox.",
+				"url": "/js/game.js"
+			},
+			{
+				"id": "js.scalecanvas",
+				"name": "scaleCanvas",
+				"syntax": "scaleCanvas(canvas, width, height)",
+				"description": "Scales a canvas to the device related pixel ratio.",
+				"url": "/js/canvas.js"
+			}
+		]
+	},
+	{
+		"id": "less",
+		"name": "Less",
+		"url": "/less",
+		"posts": [
+			{
+				"id": "less.normalize",
+				"name": "Normalize",
+				"description": "Normalizes spacing and interactive elements and adds additional alignment classes.",
+				"url": "/less/normalize.less",
+				"code": [
+					"// Required variables (define before import)",
+					"@gap: px - Space between column elements",
+					"@full-width: px - Maximum width for centered container elements",
+					"",
+					"// Alignment classes",
+					".col - Horizontal spacing",
+					".row - Inverts horziontal spacing",
+					".container - Align centered with horizontal spacing",
+					".container-fluid - Align full width with horizontal spacing",
+					"",
+					"// Structure",
+					".container-fluid {",
+					"\t.row {",
+					"\t\t.container {",
+					"\t\t\t...",
+					"\t\t}",
+					"\t}",
+					"}"
+				]
+			},
+			{
+				"id": "less.color",
+				"name": "Color",
+				"syntax": "@color-{color}[-(50,100,200,300,400,500,600,700,800,900)]",
+				"description": "A collection of material colors inspired by the Google Material Colors.",
+				"url": "/less/color.less",
+				"code": [
+					"@color-black;",
+					"@color-teal-50;",
+					"@color-blue-500;"
+				]
+			},
+			{
+				"id": "less.icons",
+				"name": "Icons",
+				"syntax": ".ico",
+				"description": "Imports the Google Material Icons Fonts.",
+				"url": "/less/icons.less",
+				"code": [
+					"<span class=\"ico\">close</span>"
+				]
+			}
+		]
+	}
+]

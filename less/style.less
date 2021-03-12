@@ -78,13 +78,14 @@ main {
 	.overview {
 		padding-left: 20px;
 		margin-bottom: 50px;
+		display: inline-block;
 
 		li {
 			margin-bottom: 25px;
 
 			p {
 				font-weight: 500;
-				margin-bottom: 5px;
+				margin-bottom: 10px;
 			}
 
 			ul {
@@ -98,6 +99,8 @@ main {
 			a {
 				color: #424242;
 				font-size: 14px;
+				text-decoration: underline;
+				cursor: pointer;
 			}
 		}
 	}
@@ -232,5 +235,19 @@ footer {
 		&:hover {
 			color: #424242;
 		}
+	}
+}
+
+.message {
+	border: 1px solid #CCC;
+	border-radius: 4px;
+	padding: 20px;
+
+	h3 {
+		margin-bottom: 10px;
+	}
+
+	p {
+		color: #666666;
 	}
 }
