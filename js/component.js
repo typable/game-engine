@@ -1,4 +1,11 @@
-import { html, escape } from './util.js';
+import { html, escape } from '../std/js/render.js';
+
+export const Message = props => {
+	return html`<div class="message">
+		<h3>${props.message}</h3>
+		${props.description ? `<p>${props.description}</p>` : ''}
+	</div>`;
+}
 
 export const Overview = props => {
 	return html`<div>
@@ -56,10 +63,3 @@ export const CopyButton = props => {
 	const copy = () => navigator.clipboard.writeText(props.value);
 	return html`<div class="clipboard ico" title="Copy" onclick=${copy}>link</div>`;
 };
-
-export const Message = props => {
-	return html`<div class="message">
-		<h3>${props.message}</h3>
-		${props.description ? `<p>${props.description}</p>` : ''}
-	</div>`;
-}
