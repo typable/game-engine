@@ -60,22 +60,26 @@
 			{
 				"id": "js.surface",
 				"name": "Surface",
-				"syntax": "Surface(x, y, width, height)",
+				"syntax": "Surface(x, y, shape)",
 				"description": "Represents a rectangular surface with its own update and render method.",
 				"import": "import { Surface } from 'https://git.typable.dev/std/js/game.js';",
 				"code": [
 					"class Player extends Surface {",
 					"\tconstructor(x, y) {",
-					"\t\tsuper(x, y, 50, 50);",
+					"\t\tsuper(x, y, new Shape.Rect(50, 50));",
 					"\t}",
 					"\tupdate() {",
-					"\t\tthis.rect.x += 1;",
+					"\t\tthis.x += 1;",
 					"\t}",
 					"\trender(g) {",
-					"\t\tconst {x, y, width, height} = this.rect;",
+					"\t\tconst {x, y, shape: {width, height}} = this;",
 					"\t\tg.fillRect(x, y, width, height);",
 					"\t}",
-					"}"
+					"}",
+					"",
+					"// Collision (in combination with a Group):",
+					"this.collided // if surface collides with another",
+					"this.items // all colliding surfaces"
 				]
 			},
 			{
@@ -88,16 +92,24 @@
 					"const group = new Group();",
 					"group.add(...);",
 					"",
+					"group.collide(); // call in update method for collision",
 					"group.update();",
 					"group.render(g);"
 				]
 			},
 			{
-				"id": "js.rect",
-				"name": "Rect",
-				"syntax": "Rect(x, y, width, height)",
+				"id": "js.shape.rect",
+				"name": "Shape.Rect",
+				"syntax": "Shape.Rect(width, height)",
 				"description": "Represents a rectangular hitbox.",
-				"import": "import { Rect } from 'https://git.typable.dev/std/js/game.js';"
+				"import": "import { Shape } from 'https://git.typable.dev/std/js/game.js';"
+			},
+			{
+				"id": "js.shape.circle",
+				"name": "Shape.Circle",
+				"syntax": "Shape.Circle(radius)",
+				"description": "Represents a circular hitbox.",
+				"import": "import { Shape } from 'https://git.typable.dev/std/js/game.js';"
 			},
 			{
 				"id": "js.scalecanvas",
