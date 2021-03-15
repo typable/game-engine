@@ -12,7 +12,7 @@ export function html(strings, ...props) {
 					if(match) {
 						const [, type] = match;
 						code = code.slice(0, -(type.length + 3));
-						code += `data-event-ref="${events.length}"`;
+						code += `data-event-ref-${events.length}`;
 						events.push({ type, handler: props[i] });
 					}
 					continue;
@@ -21,7 +21,7 @@ export function html(strings, ...props) {
 					for(const item of props[i]) {
 						if(item instanceof HTMLElement) {
 							const tag = item.tagName.toLowerCase();
-							code += `<${tag} data-child-ref="${children.length}"></${tag}>`;
+							code += `<${tag} data-child-ref-${children.length}></${tag}>`;
 							children.push(item);
 							continue;
 						}
@@ -31,7 +31,7 @@ export function html(strings, ...props) {
 				}
 				if(props[i] instanceof HTMLElement) {
 					const tag = props[i].tagName.toLowerCase();
-					code += `<${tag} data-child-ref="${children.length}"></${tag}>`;
+					code += `<${tag} data-child-ref-${children.length}></${tag}>`;
 					children.push(props[i]);
 					continue;
 				}
@@ -44,22 +44,22 @@ export function html(strings, ...props) {
 		const element = fragment.firstElementChild;
 		for(const [id, {type, handler}] of Object.entries(events)) {
 			let target;
-			if(element.getAttribute('data-event-ref') === id) {
+			if(element.hasAttribute(`data-event-ref-${id}`)) {
 				target = element;
 			}
 			else {
-				target = element.querySelector(`[data-event-ref="${id}"]`);
+				target = element.querySelector(`[data-event-ref-${id}]`);
 			}
 			if(target) {
 				target.addEventListener(type, handler);
-				target.removeAttribute('data-event-ref');
+				target.removeAttribute(`data-event-ref-${id}`);
 			}
 			else {
 				console.warn(`Unable to bind ${type} event to element with id: ${id}`);
 			}
 		}
 		for(const [id, child] of Object.entries(children)) {
-			const target = element.querySelector(`[data-child-ref="${id}"]`);
+			const target = element.querySelector(`[data-child-ref-${id}]`);
 			if(target) {
 				target.replaceWith(child);
 			}

@@ -1,4 +1,5 @@
 import { scaleCanvas } from './canvas.js';
+import * as Collision from './collision.js';
 
 export class Game {
 	constructor(width, height, { fps } = {}) {
@@ -14,7 +15,7 @@ export class Game {
 		requestAnimationFrame(this.loop.bind(this));
 		this.update();
 		this.g.save();
-		this.render(this.g),
+		this.render(this.g);
 		this.g.restore();
 	}
 	loop() {
@@ -25,7 +26,7 @@ export class Game {
 			this.then = this.now - (this.elapsed % this.fps);
 			this.update();
 			this.g.save();
-			this.render(this.g),
+			this.render(this.g);
 			this.g.restore();
 		}
 	}
@@ -53,6 +54,46 @@ export class Group {
 			g.restore();
 		}
 	}
+	collide() {
+		for(const i of this.items) {
+			i.items = [];
+			i.collided = false;
+		}
+		const duplicate = [];
+		for(const a of this.items) {
+			for(const b of this.items) {
+				if(!duplicate.includes(b)) {
+					if(a !== b) {
+						let collided = false;
+						if(a.shape instanceof Shape.Rect && b.shape instanceof Shape.Rect) {
+							collided = Collision.collideRect(a, b);
+						}
+						else if(a.shape instanceof Shape.Circle && b.shape instanceof Shape.Circle) {
+							collided = Collision.collideCircle(a, b);
+						}
+						else {
+							collided = Collision.collideRectAndCircle(a, b);
+						}
+						if(!a.collided) {
+							a.collided = collided;
+						}
+						if(!b.collided) {
+							b.collided = collided;
+						}
+						if(collided) {
+							if(!a.items.includes(b)) {
+								a.items.push(b);
+							}
+							if(!b.items.includes(a)) {
+								b.items.push(a);
+							}
+						}
+					}
+				}
+			}
+			duplicate.push(a);
+		}
+	}
 	add(item) {
 		this.items.push(item);
 	}
@@ -62,8 +103,10 @@ export class Group {
 }
 
 export class Surface {
-	constructor(x, y, width, height) {
-		this.rect = new Rect(x, y, width, height);
+	constructor(x, y, shape) {
+		this.x = x;
+		this.y = y;
+		this.shape = shape;
 	}
 	update() {
 		// empty
@@ -73,11 +116,17 @@ export class Surface {
 	}
 }
 
-export class Rect {
-	constructor(x, y, width, height) {
-		this.x = x;
-		this.y = y;
+class Rect {
+	constructor(width, height) {
 		this.width = width;
 		this.height = height;
 	}
 }
+
+class Circle {
+	constructor(radius) {
+		this.radius = radius;
+	}
+}
+
+export const Shape = { Rect, Circle };
