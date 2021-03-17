@@ -36,6 +36,11 @@ export class Game {
 	render() {
 		this.g.clearRect(0, 0, this.width, this.height);
 	}
+	resize(width, height) {
+		this.width = width;
+		this.height = height;
+		scaleCanvas(this.canvas, this.width, this.height);
+	}
 }
 
 export class Group {
@@ -97,8 +102,8 @@ export class Group {
 	add(item) {
 		this.items.push(item);
 	}
-	get() {
-		return this.items;
+	[Symbol.iterator]() {
+		return this.items.values();
 	}
 }
 

@@ -29,3 +29,14 @@ export function collideRectAndCircle(a, b) {
 	}
 	return (dx - rect.shape.width / 2) ** 2 + (dy - rect.shape.height / 2) ** 2 < circle.radius ** 2;
 }
+
+export function collidePoint(object, point) {
+	if(object.shape instanceof Shape.Rect) {
+		const {x, y, shape: {width, height}} = object;
+		return x < point.x && x + width > point.x && y < point.y && y + height > point.y;
+	}
+	if(object.shape instanceof Shape.Circle) {
+		const {x, y, shape: {radius}} = object;
+		return Math.sqrt((x - point.x) ** 2 + (y - point.y) ** 2) < radius;
+	}
+}
