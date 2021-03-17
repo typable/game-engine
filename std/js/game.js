@@ -103,7 +103,7 @@ export class Group {
 		this.items.push(item);
 	}
 	remove(item) {
-		const i = this.items.findIndex(n => n === target);
+		const i = this.items.findIndex(n => n === item);
 		if(i !== -1) {
 			this.items.splice(i, 1);
 		}
