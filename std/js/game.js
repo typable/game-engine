@@ -102,6 +102,12 @@ export class Group {
 	add(item) {
 		this.items.push(item);
 	}
+	remove(item) {
+		const i = this.items.findIndex(n => n === target);
+		if(i !== -1) {
+			this.items.splice(i, 1);
+		}
+	}
 	[Symbol.iterator]() {
 		return this.items.values();
 	}
