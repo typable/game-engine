@@ -155,7 +155,7 @@
 				"id": "less.color",
 				"name": "Color",
 				"syntax": "@color-{color}[-(50,100,200,300,400,500,600,700,800,900)]",
-				"description": "A collection of material colors inspired by the Google Material Colors.",
+				"description": "A collection of material colors inspired by the Google Material Colors.<br>Source: <a href=\"https://material.io/design/color/the-color-system.html#tools-for-picking-colors\" target=\"_blank\">View Material Colors</a>",
 				"import": "@import url('https://git.typable.dev/std/less/color.less');",
 				"code": [
 					"@color-black;",
@@ -167,7 +167,7 @@
 				"id": "less.icons",
 				"name": "Icons",
 				"syntax": ".ico",
-				"description": "Imports the Google Material Icons Fonts.",
+				"description": "Imports the Google Material Icons Fonts.<br>Source: <a href=\"https://material.io/resources/icons\" target=\"_blank\">View Material Icons</a>",
 				"import": "@import url('https://git.typable.dev/std/less/icons.less');",
 				"code": [
 					"<span class=\"ico\">close</span>"
