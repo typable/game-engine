@@ -38,6 +38,7 @@ export const App = async props => {
 			<div class="row">
 				<div class="container">
 					<span>&copy; typable ${new Date().getFullYear()}</span>
+					<a href="https://www.buymeacoffee.com/typable">Donate</a>
 					<a href="https://typable.dev/imprint">Imprint</a>
 					<a href="https://typable.dev/terms">Terms</a>
 				</div>
