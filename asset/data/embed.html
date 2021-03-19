@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style type="text/css">
+
+			* {
+				margin: 0;
+				padding: 0;
+			}
+		
+			html,
+			body {
+				overflow: hidden;
+			}
+		
+		</style>
+	</head>
+	<body>
+		<script type="module">
+
+			import { Game, Surface, Shape, Group } from 'https://git.typable.dev/std/js/game.js';
+		
+			const width = window.innerWidth;
+			const height = window.innerHeight;
+		
+			class Particle extends Surface {
+			constructor(x, y) {
+				super(x, y, new Shape.Circle(0));
+				this.origin = {x, y};
+				this.init();
+			}
+			init() {
+				this.time = 0;
+				this.angle = Math.random() * 2 * Math.PI;
+				this.offset = Math.random() * width - width / 2;
+				this.x = this.origin.x + Math.cos(this.angle) * this.offset;
+				this.y = this.origin.y + Math.sin(this.angle) * this.offset;
+				this.shape.radius = this.time;
+			}
+			update() {
+				this.time += 0.01;
+				this.x += Math.cos(this.angle) * this.time / this.offset * 50;
+				this.y += Math.sin(this.angle) * this.time / this.offset * 50;
+				this.shape.radius = this.time / Math.abs(this.offset) * 50;
+				if(!(this.x > 0 && this.x < width && this.y > 0 && this.y < height)) {
+				this.init();
+				}
+			}
+			render(g) {
+				const {x, y, shape: {radius}} = this;
+				g.fillStyle = 'white';
+				g.beginPath();
+				g.arc(x, y, radius, 2 * Math.PI, 0);
+				g.fill();
+			}
+			}
+		
+			class Universe extends Game {
+			constructor() {
+				super(width, height);
+				this.group = new Group();
+				for(let i = 0; i < 500; i++) {
+				this.group.add(new Particle(width / 2, height / 2));
+				}
+			}
+			update() {
+				this.group.update();
+			}
+			render(g) {
+				super.render(g);
+				g.fillRect(0, 0, this.width, this.height);
+				this.group.render(g);
+			}
+			}
+		
+			const game = new Universe();
+			document.body.append(game.canvas);
+			game.start();
+		
+		</script>
+	</body>
+</html>

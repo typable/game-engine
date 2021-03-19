@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="author" content="typable">
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<meta name="robots" content="noindex, nofollow">
+		<meta name="google" content="notranslate">
+		<title>git.typable</title>
+		<link href="/asset/img/favicon.png" rel="shortcut icon" type="image/png">
+		<link href="/asset/css/style.css" rel="stylesheet">
+		<script src="/asset/js/index.js" type="module"></script>
+	</head>
+	<body>
+		<main class="container-fluid">
+			<div class="row">
+				<div class="container">
+					<aside>
+						<h4 data-rel="top">Game Engine</h4>
+						<ul>
+							<li data-rel="introduction">Introduction</li>
+							<li data-rel="getting-started">Getting Started</li>
+							<li data-rel="rendering">Rendering</li>
+							<li data-rel="collision">Collision</li>
+							<li data-rel="event-handling">Event Handling</li>
+						</ul>
+					</aside>
+					<ul class="breadcrumb">
+						<li><a href="/">Home</a></li>
+						<li>Game Engine</li>
+					</ul>
+					<h1>Game Engine</h1>
+					<p class="subline">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+					<h2 data-ref="introduction">Introduction</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br><br>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+					<div class="space-2"></div>
+					<p><a href="/game-engine/api">API</a></p>
+					<div class="embed">
+						<iframe src="/asset/data/embed.html" frameborder="0"></iframe>
+						<p>Source: <a href="https://jsitor.com/NooIssgCT">"Universe" - typable</a></p>
+					</div>
+					<h2 data-ref="getting-started">Getting Started</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+					<code><pre><span class="c">import</span> { <span class="n ref">Game</span> } <span class="c">from</span> <span class="s">'<span class="ref ref-link">https://git.typable.dev/std/js/game.js</span>'</span>;
+
+<span class="c">class</span> <span class="n">Sandbox</span> <span class="c">extends</span> <span class="n ref">Game</span> {
+	<span class="p">constructor</span>() {
+		<span class="c">super</span>(<span class="n">900</span>, <span class="n">600</span>);
+	}
+}
+
+<span class="c">const</span> <span class="n">game</span> = <span class="c">new</span> <span class="n">Sandbox</span>();
+<span class="n">document</span>.<span class="n">body</span>.<span class="p">append</span>(<span class="n">game</span>.<span class="n ref">canvas</span>);
+<span class="n">game</span>.<span class="p ref">start</span>();</pre></code>
+				<h2 data-ref="rendering">Rendering</h2>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+					<code><pre><span class="c">import</span> { <span class="n ref">Surface</span>, <span class="n ref">Shape</span> } <span class="c">from</span> <span class="s">'<span class="ref ref-link">https://git.typable.dev/std/js/game.js</span>'</span>;
+
+<span class="c">class</span> <span class="n">Player</span> <span class="c">extends</span> <span class="n ref">Surface</span> {
+	<span class="p">constructor</span>(<span class="n">x</span>, <span class="n">y</span>) {
+		<span class="c">super</span>(<span class="n">x</span>, <span class="n">y</span>, <span class="c">new</span> <span class="n ref">Shape</span>.<span class="n ref">Circle</span>(<span class="n">50</span>));
+	}
+	<span class="p">render</span>(<span class="n">g</span>) {
+		<span class="c">const</span> { <span class="n">x</span>, <span class="n">y</span>, <span class="n">shape</span>: { <span class="n">radius</span> } } = <span class="c">this</span>;
+		<span class="n">g</span>.<span class="p">beginPath</span>();
+		<span class="n">g</span>.<span class="p">arc</span>(<span class="n">x</span>, <span class="n">y</span>, <span class="n">radius</span>, <span class="n">2</span> * <span class="n">Math</span>.<span class="c">PI</span>, <span class="n">0</span>);
+		<span class="n">g</span>.<span class="p">stroke</span>();
+	}
+}</pre></code>
+					<code><pre><span class="p">render</span>(<span class="n">g</span>) {
+	<span class="c ref">super</span>.<span class="p">render</span>(<span class="n">g</span>);
+	<span class="n">player</span>.<span class="p ref">render</span>(<span class="n">g</span>);
+}</pre></code>
+					<h2 data-ref="collision">Collision</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+					<code><pre><span class="c">import</span> { <span class="n ref">Group</span> } <span class="c">from</span> <span class="s">'<span class="ref ref-link">https://git.typable.dev/std/js/game.js</span>'</span>;
+
+<span class="c">const</span> <span class="n">group</span> = <span class="c">new</span> <span class="n ref">Group</span>();
+<span class="n">group</span>.<span class="p ref">add</span>(...);</pre></code>
+					<code><pre><span class="p">update</span>() {
+	<span class="n">group</span>.<span class="p ref">collide</span>();
+	<span class="n">group</span>.<span class="p ref">update</span>();
+}</pre></code>
+					<code><pre><span class="p">update</span>() {
+	<span class="c">const</span> { <span class="n ref">collided</span>, <span class="n ref">items</span> } = <span class="c ref">this</span>;
+	<span class="c">if</span>(<span class="n">collided</span>) {
+		<span class="x">// handle collision</span>
+	}
+}</pre></code>
+					<h2 data-ref="event-handling">Event Handling</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+					<code><pre><span class="c">this</span>.<span class="p ref">bindEvent</span>(<span class="c">this</span>.<span class="n">canvas</span>, <span class="s">'onclick'</span>);</pre></code>
+					<code><pre><span class="p ref">populateEvent</span>(<span class="n">event</span>) {
+	<span class="x">// populate properties</span>
+	<span class="c">return</span> <span class="n">event</span>;
+}</pre></code>
+					<code><pre><span class="c">const</span> { <span class="n ref">click</span> } = <span class="c">this</span>.<span class="n ref">events</span>;
+
+<span class="c">if</span>(<span class="n">click</span>) {
+	<span class="x">// handle click</span>
+}</pre></code>
+				</div>
+			</div>
+		</main>
+		<footer class="container-fluid">
+			<div class="row">
+				<div class="container">
+					<p>&copy; typable 2021</p>
+					<a href="https://www.buymeacoffee.com/typable">Donate</a>
+					<a href="https://typable.dev/imprint">Imprint</a>
+					<a href="https://typable.dev/terms">Terms</a>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>
