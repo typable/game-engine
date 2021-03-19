@@ -1,4 +1,4 @@
 MINIFY=true
 AUTO_COMPILE=true
-SOURCE_FILE=less/style.less
-TARGET_FILE=css/style.css
+SOURCE_FILE=asset/less/style.less
+TARGET_FILE=asset/css/style.css
