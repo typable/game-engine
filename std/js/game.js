@@ -10,6 +10,15 @@ export class Game {
 		this.canvas = document.createElement('canvas');
 		scaleCanvas(this.canvas, this.width, this.height);
 		this.g = this.canvas.getContext('2d');
+		this.events = new Proxy({}, {
+			get: function(object, prop) {
+				const val = object[prop];
+				if(typeof val !== 'undefined') {
+					delete object[prop];
+				}
+				return val;
+			}
+		});
 	}
 	start() {
 		requestAnimationFrame(this.loop.bind(this));
@@ -40,6 +49,11 @@ export class Game {
 		this.width = width;
 		this.height = height;
 		scaleCanvas(this.canvas, this.width, this.height);
+	}
+	bindEvent(element, event) {
+		element[event] = event => {
+			this.events[event.type] = this.populateEvent ? { type: event.type, ...this.populateEvent(event) } : event;
+		}
 	}
 }
 
@@ -118,6 +132,15 @@ export class Surface {
 		this.x = x;
 		this.y = y;
 		this.shape = shape;
+		this.events = new Proxy({}, {
+			get: function(object, prop) {
+				const val = object[prop];
+				if(typeof val !== 'undefined') {
+					delete object[prop];
+				}
+				return val;
+			}
+		});
 	}
 	update() {
 		// empty
@@ -133,6 +156,9 @@ export class Surface {
 			g.arc(this.x, this.y, this.shape.radius, 2 * Math.PI, 0);
 			g.stroke();
 		}
+	}
+	causeEvent(event) {
+		this.events[event.type] = event;
 	}
 }
 
