@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="author" content="typable">
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<meta name="robots" content="noindex, nofollow">
+		<meta name="google" content="notranslate">
+		<title>git.typable</title>
+		<link href="/asset/img/favicon.png" rel="shortcut icon" type="image/png">
+		<link href="/asset/css/style.css" rel="stylesheet">
+		<script src="/asset/js/index.js" type="module"></script>
+	</head>
+	<body>
+		<main class="container-fluid">
+			<div class="row">
+				<div class="container">
+					<aside>
+						<h4 data-rel="top">Spring Framework</h4>
+						<ul>
+							<li data-rel="requirements">Requirements</li>
+							<li data-rel="getting-started">Getting Started</li>
+							<li data-rel="configurations">Configurations</li>
+							<li data-rel="start-up">Start Up</li>
+						</ul>
+					</aside>
+					<ul class="breadcrumb">
+						<li><a href="/">Home</a></li>
+						<li><a href="/blog">Blog</a></li>
+						<li>Spring Framework</li>
+					</ul>
+					<h1>Spring Framework</h1>
+					<p class="subline">The following article is a short introduction to the basic setup of a new Spring
+						Web Project. All required dependencies for this project are managed by a
+						<a href="https://stackoverflow.com/a/19516639">Build Tool</a>, in this case,
+						<a href="https://gradle.org">Gradle</a>.</p>
+					<h2 data-ref="requirements">Requirements</h2>
+					<h4>Install Eclipse Plugins</h4>
+					<p>The listed Eclipse Plugins are needed to work on Spring projects smoothly. To check if they are
+						already installed and if not how to install them, check out this article:
+						<a href="">Eclipse - Install Plugins</a></p>
+					<ul class="list">
+						<li>
+							<p>Spring Tools 4 - It provides the functionality to create and launch Spring projects.<br>
+								<a href="https://marketplace.eclipse.org/content/spring-tools-4-aka-spring-tool-suite-4">Eclipse Marketplace</a></p>
+						</li>
+						<li>
+							<p>Eclipse Web Developer Tools - Deliveres HTML, CSS and JS Editors.<br>
+								<a href="https://marketplace.eclipse.org/content/eclipse-web-developer-tools-0">Eclipse Marketplace</a></p>
+						</li>
+					</ul>
+					<div class="space-2"></div>
+					<h4>Prepare Eclipse Workspace</h4>
+					<ul class="list">
+						<li>
+							<p><b>File Association</b><br><br>"JSP and Tag files has the same Syntax as HTML", in this case, we can
+								now associate the default HTML Editor (delivered by the Eclipse Web Developer Tools Plugin)
+								also to the file types .jsp and .tag to let Eclipse now with which Editor these files
+								should be opened.<br><br>More details about the association of file types could be found
+								in this article: <a href="https://help.eclipse.org/2021-03/index.jsp">Eclipse - Manage File Associations</a></p>
+						</li>
+						<div class="space-1"></div>
+						<li>
+							<p><b>Perspective and Views</b><br><br>Web Projects are typically viewed in the Resource Perspective,
+								so if the Perspective is not shown by default, add it to your Eclipse Workspace.<br><br>
+								The needed views for a smooth working process are the following:<br><br>
+								-> Project Explorer<br>
+								-> Boot Dashboard<br>
+								-> Console<br>
+								-> Gradle Tasks<br><br>
+								More about managing Perspectives and Views can be found here:
+								<a href="https://help.eclipse.org/2021-03/index.jsp">Eclipse - Manage Perspectives and Views</a></p>
+						</li>
+					</ul>
+					<h2 data-ref="getting-started">Getting Started</h2>
+					<h4>Project Setup</h4>
+					<p>To create a new Spring project in Eclipse we choose the project type <mark>Spring Starter Project</mark> under
+						the category <mark>Spring Boot</mark>.</p>
+					<p><b>File -> New -> Project... -> Spring Boot -> Spring Starter Project</b></p>
+					<p>The following properties are required to set up our project correctly:</p>
+					<ul class="list list-short">
+						<li>
+							<p><mark>Name</mark> - The name of your project.</p>
+						</li>
+						<li>
+							<p><mark>Type</mark> - The Build Tool to use for the project. In our case, we use Gradle (Buildship 3.x).</p>
+						</li>
+						<li>
+							<p><mark>Java Version</mark> - The Java Version for the project. The currently preferred Version is 11.</p>
+						</li>
+						<li>
+							<p><mark>Group</mark> - Should be the same as the Package path.</p>
+						</li>
+						<li>
+							<p><mark>Artifact</mark> - The name of your startup Java file.</p>
+						</li>
+						<li>
+							<p><mark>Version</mark> - The version of your project.</p>
+						</li>
+						<li>
+							<p><mark>Description</mark> - A short description of your project.</p>
+						</li>
+						<li>
+							<p><mark>Package</mark> - The root package of your project.<br><br>
+								<b class="note">Important:</b> <span>All Java files must be found in the defined root package
+								or a subpackage of them, otherwise Spring is unable to locate these files.</span></p>
+						</li>
+					</ul>
+					<p>Complete the setup wizard by skipping the choose of dependencies and click Finish. Now Eclipse
+						prepares our Spring Project, this could take some time to build up all needed resources.</p>
+					<p>Then this is done the worktree should now contain the following directories and files:</p>
+					<code><pre><span class="p">Tutorial</span>
+ ├ <span class="p">src/main</span>
+ |  ├ <span class="p">java</span>
+ |  |  └ <span class="n">de.innovate.tutorial</span>
+ |  |     └ <span class="n">TutorialApplication.java</span>
+ |  └ <span class="p">resources</span>
+ |     └ <span class="n">application.properties</span>
+ ├ <span class="p">gradle</span>
+ |  └ ∙∙∙
+ ├ <span class="n">build.gradle</span>
+ ├ <span class="n">gradlew</span>
+ ├ <span class="n">gradlew.bat</span>
+ ├ <span class="n">HELP.md</span>
+ └ <span class="n">settings.gradle</span></pre></code>
+					<p><b class="note">Notice:</b> <span>All <mark>test</mark> directories and files can be deleted.
+						They aren't needed in our working process with Spring.</span></p>
+					<div class="space-2"></div>
+					<h4>Project Building</h4>
+					<p>The basic workspace setup is completed and we can now define the essential dependencies for
+						Spring Web. All required dependencies for our project should be referenced in the build.gradle
+						file. For that replace the content of the <mark>/build.gradle</mark> file with the following code snippet:</p>
+					<code><pre><span class="p">plugins</span> {
+	<span class="n">id</span> <span class="s">'org.springframework.boot'</span> <span class="n">version</span> <span class="s">'2.2.0.RELEASE'</span>
+	<span class="n">id</span> <span class="s">'io.spring.dependency-management'</span> <span class="n">version</span> <span class="s">'1.0.8.RELEASE'</span>
+	<span class="n">id</span> <span class="s">'java'</span>
+}
+<span class="n">group</span> = <span class="s">'de.typable.tutorial'</span>
+<span class="n">version</span> = <span class="s">'0.0.1'</span>
+<span class="n">sourceCompatibility</span> = <span class="s">'11'</span>
+<span class="p">repositories</span> {
+	<span class="n">mavenCentral</span>()
+}
+<span class="p">dependencies</span> {
+	<span class="x">/* Spring Web */</span>
+	<span class="n">implementation</span> <span class="s">'org.springframework.boot:spring-boot-starter-web'</span>
+	<span class="x">/* JSP & JSTL */</span>
+	<span class="n">implementation</span> <span class="s">'org.apache.tomcat.embed:tomcat-embed-jasper:9.0.27'</span>
+	<span class="n">implementation</span> <span class="s">'javax.servlet:jstl:1.2'</span>
+}</pre></code>
+					<p>We have now referenced the elementary dependencies for a Spring Web project. Additional could be
+						added in the dependencies section. More about dependencies and where to find them could be found
+						in this article: <a href="https://docs.gradle.org/current/userguide/core_dependency_management.html">Gradle - Dependencies</a></p>
+					<p>The next step is to build the project with Gradle to download all in the build.gradle defined
+						dependencies. To do that go to the Gradle Tasks View and double-click on build under the build
+						section.</p>
+					<p><b>Gradle Tasks -> [Project] -> build -> build</b></p>
+					<p>During the building process, the current progress will be displayed in the Gradle Executions View
+						and the Console View. The Gradle Executions View is in most cases needless because the Console
+						gives us much clearer feedback about what's happening and what went wrong if the build crashes.
+						To ensure the building process is successful the Console displays the message
+						<mark>BUILD SUCCESSFUL</mark>.</p>
+					<p><b class="note">Tip:</b> <span>Disabling the Gradle Executions View can be done as followed:
+						<b>Window -> Preferences -> Gradle -> Show Executions View</b></span></p>
+					<p>The building process is finished and this has affected our project worktree, because of that, we
+						need to refresh our project. For that, we right-click on the project in the Package Explorer
+						View and click on <mark>Refresh Gradle Project</mark> under the Gradle section. After that, our Spring project
+						is up to date.</p>
+					<p><b>Project Explorer -> [Project] -> Gradle -> Refresh Gradle Project</b></p>
+					<h2 data-ref="configurations">Configurations</h2>
+					<p>To optimize the project to our needs, we configure some properties in the
+						<mark>application.properties</mark> file. This can also be done with XML. More information about
+						XML configuration can be found here:
+						<a href="https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-application-properties.html">Spring - XML Configurations</a></p>
+					<p>Add the following properties to <mark>/src/main/resources/application.properties</mark>:</p>
+					<code><pre><span class="p">server.port</span>=<span class="n">8080</span>
+<span class="p">spring.mvc.view.prefix</span>=<span class="n">/WEB-INF/views/</span>
+<span class="p">spring.mvc.view.suffix</span>=<span class="n">.jsp</span>
+<span class="x"># Reload static resources (Temporary)</span>
+<span class="p">spring.resources.static-locations</span>=<span class="n">file:src/main/resources/static/</span></pre></code>
+					<p>Here a short explanation of the properties from above:</p>
+					<ul class="list">
+						<li>
+							<p><mark>server.port</mark> - Defines which <a href="https://de.wikipedia.org/wiki/Port_(Protokoll)">Port</a>
+								is used to listen for incoming requests by the Browser. The default ports are 80
+								(http://) and 443 (https://).<br><br><b class="note">Example:</b> <span>80 -> http://localhost, 443 ->
+								https://localhost, 8080 -> http://localhost:8080</span></p>
+						</li>
+						<li>
+							<p><mark>spring.mvc.view.prefix</mark> - Defines in which directory the server should looking
+								for them to be served HTML, JSP files. The default path is <mark>/WEB-INF/views/</mark>
+								which represents <mark>/src/main/resources/META-INF/resources/WEB-INF/views/</mark>.</p>
+						</li>
+						<li>
+							<p><mark>spring.mvc.view.suffix</mark> - Defines the file type for them to be served files.
+								The default file type is are .jsp and .html.</p>
+						</li>
+						<li>
+							<p><mark>spring.resources.static-locations</mark> - Files in the defined path can be modified
+								without restarting the server to see the changes. It is common to put all resources like
+								CSS, JavaScript and Images in <mark>/src/main/resources/static/</mark>.<br><br>
+								<b>Notice:</b> This is a temporary property only for development</p>
+						</li>
+					</ul>
+					<h2 data-ref="start-up">Start Up</h2>
+					<p>Now it's at the time to launch our Spring Web server to confirm all is configured correctly.<br><br>To
+						start the <a href="http://tomcat.apache.org">Apache Tomcat</a> server that provides the basic
+						functionality of a web server which is integrated in our handy Spring Tools Plugin, we go to the
+						<mark>Boot Dashboard</mark> View expand the <mark>local</mark> section and select the project
+						with our predefined name and click on the "Start or restart" button at the top of the View.</p>
+					<p>To confirm the server is started correctly the console should show up the message:
+						<mark>Started TutorialApplication ...</mark></p>
+					<p>Now the Spring Web server is available under the defined port and can be viewed in the Browser of
+						your choice. The page should show the message <mark>Whitelabel Error Page</mark>, this means that
+						no content is currently available.</p>
+					<p>Now everything is ready to build your project.</p>
+				</div>
+			</div>
+		</main>
+		<footer class="container-fluid">
+			<div class="row">
+				<div class="container">
+					<p>&copy; typable 2021</p>
+					<a href="https://www.buymeacoffee.com/typable">Donate</a>
+					<a href="https://typable.dev/imprint">Imprint</a>
+					<a href="https://typable.dev/terms">Terms</a>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>

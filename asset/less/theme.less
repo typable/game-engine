@@ -62,8 +62,35 @@ h4 {
 p {
 	color: @color-gray-700;
 	font-size: 16px;
-	margin-top: @space-1x;
-	line-height: 24px;
+	margin-top: @space-2x;
+	line-height: 26px;
+
+	a {
+		text-decoration: underline;
+		white-space: nowrap;
+	}
+
+	mark {
+		background: @color-gray-200;
+		white-space: nowrap;
+		border-radius: 2px;
+		padding: 2px 4px;
+		color: @color-gray-800;
+	}
+
+	b {
+		font-weight: 500;
+
+		&.note {
+			margin-bottom: calc(@space-1x / 2);
+			display: inline-block;
+		}
+	}
+
+	span {
+		color: inherit;
+		display: block;
+	}
 }
 
 .slogan {
@@ -76,8 +103,11 @@ p {
 }
 
 .subline {
+	margin-top: @space-2x;
 	font-weight: 500;
 	font-size: 18px;
+	line-height: 28px;
+	color: @color-gray-600;
 }
 
 a {
@@ -87,6 +117,22 @@ a {
 	&:hover {
 		text-decoration: underline;
 		color: @color-gray-900;
+	}
+}
+
+.list {
+	padding-left: @space-1x;
+
+	p {
+		margin-left: calc(@space-1x / 2);
+	}
+
+	&.list-short {
+		margin-top: @space-1x;
+
+		p {
+			margin-top: calc(@space-1x / 2);
+		}
 	}
 }
 
@@ -121,6 +167,7 @@ aside {
 
 	ul {
 		list-style-type: none;
+		margin-top: @space-2x;
 
 		li {
 			margin-top: calc(@space-1x / 2);
