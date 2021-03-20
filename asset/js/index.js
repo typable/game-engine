@@ -38,4 +38,20 @@ window.onload = async function() {
 			}
 		}
 	}
+	for(const icon of document.querySelectorAll('.icon')) {
+		icon.onclick = function() {
+			if(snackbar) {
+				snackbar.classList.add('active');
+				let time = new Date().getTime();
+				setTimeout(() => {
+					if(delay === time) {
+						snackbar.classList.remove('active');
+					}
+				}, 3000);
+				const value = `${icon.innerHTML}`;
+				navigator.clipboard.writeText(value);
+				delay = time;
+			}
+		}
+	}
 };
