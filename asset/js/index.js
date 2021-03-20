@@ -20,4 +20,22 @@ window.onload = async function() {
 			}
 		}
 	}
+	let delay;
+	const snackbar = document.querySelector('.snackbar');
+	for(const tone of document.querySelectorAll('.palette-tone')) {
+		tone.onclick = function() {
+			if(snackbar) {
+				snackbar.classList.add('active');
+				let time = new Date().getTime();
+				setTimeout(() => {
+					if(delay === time) {
+						snackbar.classList.remove('active');
+					}
+				}, 3000);
+				const value = `@color-${tone.parentNode.dataset.type}-${tone.textContent}`;
+				navigator.clipboard.writeText(value);
+				delay = time;
+			}
+		}
+	}
 };

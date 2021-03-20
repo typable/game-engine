@@ -315,7 +315,6 @@ code {
 		display: flex;
 		flex-direction: column;
 		border-radius: 4px;
-		overflow: hidden;
 		width: calc(25% - @space-1x * 3 / 4);
 		margin-bottom: @space-1x;
 
@@ -328,10 +327,30 @@ code {
 			padding: calc(@space-1x / 1.25);
 			cursor: pointer;
 			user-select: none;
+			transition: margin ease 0.2s, width ease 0.2s, height ease 0.2s, padding ease 0.2s, border-radius ease 0.2s;
 
 			&.dark {
 				color: @color-gray-900;
 				font-weight: 600;
+			}
+
+			&:hover {
+				margin: -4px;
+				width: calc(100% + 8px);
+				height: calc(100% + 8px);
+				padding: calc(@space-1x / 1.25 + 4px);
+				z-index: 1;
+				border-radius: 4px;
+			}
+
+			&:first-of-type {
+				border-top-left-radius: 4px;
+				border-top-right-radius: 4px;
+			}
+
+			&:last-of-type {
+				border-bottom-left-radius: 4px;
+				border-bottom-right-radius: 4px;
 			}
 		}
 	}
@@ -356,11 +375,12 @@ code {
 		cursor: pointer;
 		
 		.ico {
-			color: @color-gray-700;
+			color: @color-gray-600;
+			transition: color ease 0.2s;
 		}
 
 		&:hover {
-			
+
 			.ico {
 				color: @color-gray-900;
 			}
@@ -387,5 +407,81 @@ footer {
 
 	a {
 		font-size: 16px;
+	}
+}
+
+.tooltip {
+	position: relative;
+
+	&:hover {
+
+		&::before,
+		&::after {
+			opacity: 1;
+			transition-delay: 1s;
+		}
+
+		&::before {
+			bottom: -13px;
+		}
+
+		&::after {
+			bottom: -40px;
+		}
+	}
+
+	&::before,
+	&::after {
+		opacity: 0;
+		content: '';
+		display: inline-block;
+		position: absolute;
+		user-select: none;
+		pointer-events: none;
+		transition: opacity ease 0.1s, bottom ease 0.1s;
+		transition-delay: 0s;
+		z-index: 2;
+		left: 50%;
+		transform: translate(-50%, 0);
+	}
+
+	&::before {
+		border: 3px solid transparent;
+		border-bottom: 3px solid @color-gray-900;
+		bottom: -10px;
+	}
+
+	&::after {
+		content: attr(data-title);
+		background: @color-gray-900;
+		font-size: 12px;
+		color: @color-white;
+		white-space: nowrap;
+		padding: 6px 10px;
+		padding-bottom: 7px;
+		border-radius: 3px;
+		bottom: -37px;
+		height: 15px;
+		min-width: 40px;
+		text-align: center;
+		font-weight: 400;
+	}
+}
+
+.snackbar {
+	background: @color-gray-900;
+	position: fixed;
+	left: @space-2x;
+	bottom: @space-1x;
+	border-radius: 4px;
+	color: @color-white;
+	padding: 18px 30px;
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity ease 0.2s, bottom ease 0.2s;
+
+	&.active {
+		opacity: 1;
+		bottom: @space-2x;
 	}
 }
