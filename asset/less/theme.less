@@ -3,6 +3,11 @@
 @space-4x: 80px;
 @space-8x: 160px;
 
+@screen-xs: 576px;
+@screen-sm: 768px;
+@screen-md: 992px;
+@screen-lg: 1200px;
+
 .space-1 {
 	width: 100%;
 	height: @space-1x;
@@ -26,6 +31,13 @@
 * {
 	color: @color-gray-900;
 	font-family: 'Inter';
+	-webkit-tap-highlight-color: transparent;
+}
+
+body,
+main,
+footer{
+	overflow-x: hidden;
 }
 
 body {
@@ -54,11 +66,15 @@ h1 {
 h2 {
 	font-size: 28px;
 	font-weight: 700;
-	margin-top: @space-8x;
+	margin-top: @space-4x;
 	margin-bottom: @space-2x;
 
 	@media(prefers-color-scheme: dark) {
 		color: @color-white;
+	}
+	
+	@media(min-width: @screen-xs) {
+		margin-top: @space-8x;
 	}
 }
 
@@ -94,15 +110,14 @@ p {
 
 	a {
 		text-decoration: underline;
-		white-space: nowrap;
 	}
 
 	mark {
 		background: @color-gray-200;
-		white-space: nowrap;
 		border-radius: 2px;
 		padding: 2px 4px;
 		color: @color-gray-800;
+		word-break: break-word;
 
 		@media(prefers-color-scheme: dark) {
 			color: @color-gray-400;
@@ -134,8 +149,12 @@ p {
 }
 
 .slogan {
-	font-size: 64px;
+	font-size: 44px;
 	margin-bottom: @space-4x;
+
+	@media(min-width: @screen-xs) {
+		font-size: 64px;
+	}
 }
 
 .slogan-subline {
@@ -228,6 +247,11 @@ aside {
 	transform: translate(calc(-100% - @space-2x), 0);
 	width: 250px;
 	padding-top: @space-4x;
+	display: none;
+
+	@media(min-width: @screen-lg) {
+		display: block;
+	}
 
 	h4 {
 		margin: 0;
@@ -271,6 +295,19 @@ code {
 	padding: @space-1x;
 	margin-top: @space-2x;
 	position: relative;
+	overflow-x: auto;
+
+	&::-webkit-scrollbar {
+		height: 8px;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background: @color-gray-700;
+
+		&:hover {
+			background: @color-gray-800;
+		}
+	}
 
 	@media(prefers-color-scheme: dark) {
 		background: darken(@color-gray-900, 8%);
@@ -281,6 +318,7 @@ code {
 		line-height: 22px;
 		tab-size: 40px;
 		font-family: 'JetBrains Mono', monospace;
+		display: inline-block;
 
 		span {
 			font-family: 'JetBrains Mono', monospace;
@@ -400,8 +438,13 @@ code {
 	iframe {
 		border-radius: 4px;
 		width: 100%;
-		height: 500px;
+		height: calc(100vw * 500 / 800);
 		pointer-events: none;
+
+		@media(min-width: 800px) {
+			width: 100%;
+			height: 500px;
+		}
 	}
 
 	p {
@@ -411,8 +454,12 @@ code {
 
 .breadcrumb {
 	display: flex;
-	padding-top: @space-4x;
+	padding-top: @space-2x;
 	list-style-type: none;
+
+	@media(min-width: @screen-xs) {
+		padding-top: @space-4x;
+	}
 
 	li {
 		color: @color-gray-700;
@@ -457,8 +504,12 @@ code {
 		display: flex;
 		flex-direction: column;
 		border-radius: 4px;
-		width: calc(25% - @space-1x * 3 / 4);
+		width: calc(50% - @space-1x * 1 / 2);
 		margin-bottom: @space-1x;
+
+		@media(min-width: @screen-xs) {
+			width: calc(25% - @space-1x * 3 / 4);
+		}
 
 		.palette-tone {
 			width: 100%;
@@ -473,7 +524,7 @@ code {
 
 			&.dark {
 				color: @color-gray-900;
-				font-weight: 600;
+				font-weight: 500;
 			}
 
 			&:hover {
@@ -511,10 +562,18 @@ code {
 		border-radius: 4px;
 		justify-content: center;
 		align-items: center;
-		width: calc(10% - @space-1x * 9 / 10);
+		width: calc(25% - @space-1x * 3 / 4);
 		aspect-ratio: 1 / 1;
 		background: @color-gray-50;
 		cursor: pointer;
+
+		@media(min-width: @screen-xs) {
+			width: calc(16.666% - @space-1x * 5 / 6);
+		}
+
+		@media(min-width: @screen-sm) {
+			width: calc(10% - @space-1x * 9 / 10);
+		}
 		
 		.ico {
 			color: @color-gray-600;
@@ -546,8 +605,20 @@ code {
 }
 
 footer {
-	margin-top: @space-8x;
-	margin-bottom: @space-4x;
+	margin-top: @space-4x;
+	margin-bottom: @space-2x;
+
+	@media(min-width: @screen-xs) {
+		margin-top: @space-8x;
+		margin-bottom: @space-4x;
+
+		a {
+
+			&:first-of-type {
+				display: flex !important;
+			}
+		}
+	}
 
 	.container {
 		display: flex;
@@ -564,6 +635,12 @@ footer {
 
 	a {
 		font-size: 16px;
+		display: flex;
+		align-items: center;
+
+		&:first-of-type {
+			display: none;
+		}
 	}
 
 	@media(prefers-color-scheme: dark) {
@@ -643,17 +720,30 @@ footer {
 .snackbar {
 	background: @color-gray-900;
 	position: fixed;
-	left: @space-2x;
-	bottom: @space-1x;
+	left: 50%;
+	bottom: 0;
 	border-radius: 4px;
 	color: @color-white;
 	padding: 18px 30px;
 	pointer-events: none;
 	opacity: 0;
 	transition: opacity ease 0.2s, bottom ease 0.2s;
+	transform: translate(-50%, 0);
+	white-space: nowrap;
+	z-index: 99;
 
 	&.active {
 		opacity: 1;
-		bottom: @space-2x;
+		bottom: @space-1x;
+	}
+
+	@media(min-width: @screen-xs) {
+		left: @space-2x;
+		bottom: @space-1x;
+		transform: none;
+
+		&.active {
+			bottom: @space-2x;
+		}
 	}
 }
