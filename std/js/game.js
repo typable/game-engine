@@ -10,22 +10,12 @@ export class Game {
 		this.canvas = document.createElement('canvas');
 		scaleCanvas(this.canvas, this.width, this.height);
 		this.g = this.canvas.getContext('2d');
-		this.events = new Proxy({}, {
-			get: function(object, prop) {
-				const val = object[prop];
-				if(typeof val !== 'undefined') {
-					delete object[prop];
-				}
-				return val;
-			}
-		});
+		this.events = [];
 	}
 	start() {
 		requestAnimationFrame(this.loop.bind(this));
 		this.update();
-		this.g.save();
 		this.render(this.g);
-		this.g.restore();
 	}
 	loop() {
 		requestAnimationFrame(this.loop.bind(this));
@@ -33,14 +23,18 @@ export class Game {
 		this.elapsed = this.now - this.then;
 		if(this.elapsed > this.fps) {
 			this.then = this.now - (this.elapsed % this.fps);
+			for(const event of this.events) {
+				if(this['on' + event.type]) {
+					this['on' + event.type](event);
+				}
+			}
 			this.update();
-			this.g.save();
 			this.render(this.g);
-			this.g.restore();
+			this.events.length = 0;
 		}
 	}
 	update() {
-		// empty
+		// nothing
 	}
 	render() {
 		this.g.clearRect(0, 0, this.width, this.height);
@@ -50,10 +44,8 @@ export class Game {
 		this.height = height;
 		scaleCanvas(this.canvas, this.width, this.height);
 	}
-	bindEvent(element, event) {
-		element[event] = event => {
-			this.events[event.type] = this.populateEvent ? { type: event.type, ...this.populateEvent(event) } : event;
-		}
+	bindEvent(element, type) {
+		element['on' + type] = event => this.events.push(event);
 	}
 }
 
@@ -68,9 +60,12 @@ export class Group {
 	}
 	render(g) {
 		for(let item of this.items) {
-			g.save();
 			item.render(g);
-			g.restore();
+		}
+	}
+	causeEvent(type, events) {
+		for(let item of this.items) {
+			item.causeEvent(type, events);
 		}
 	}
 	collide() {
@@ -132,18 +127,9 @@ export class Surface {
 		this.x = x;
 		this.y = y;
 		this.shape = shape;
-		this.events = new Proxy({}, {
-			get: function(object, prop) {
-				const val = object[prop];
-				if(typeof val !== 'undefined') {
-					delete object[prop];
-				}
-				return val;
-			}
-		});
 	}
 	update() {
-		// empty
+		// nothing
 	}
 	render(g) {
 		if(this.shape instanceof Shape.Rect) {
@@ -157,8 +143,14 @@ export class Surface {
 			g.stroke();
 		}
 	}
-	causeEvent(event) {
-		this.events[event.type] = event;
+	causeEvent(type, events) {
+		if(this['on' + type]) {
+			for(const event of events) {
+				if(event.type === type) {
+					this['on' + type](event);
+				}
+			}
+		}
 	}
 }
 

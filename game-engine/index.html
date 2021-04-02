@@ -93,14 +93,9 @@
 }</pre></code>
 					<h2 data-ref="event-handling">Event Handling</h2>
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-					<code><pre><span class="c">this</span>.<span class="p ref">bindEvent</span>(<span class="c">this</span>.<span class="n">canvas</span>, <span class="s">'onclick'</span>);</pre></code>
-					<code><pre><span class="p ref">populateEvent</span>(<span class="n">event</span>) {
-	<span class="x">// populate properties</span>
-	<span class="c">return</span> <span class="n">event</span>;
-}</pre></code>
-					<code><pre><span class="c">const</span> { <span class="n ref">click</span> } = <span class="c">this</span>.<span class="n ref">events</span>;
-
-<span class="c">if</span>(<span class="n">click</span>) {
+					<code><pre><span class="c">this</span>.<span class="p ref">bindEvent</span>(<span class="c">this</span>.<span class="n">canvas</span>, <span class="s">'click'</span>);</pre></code>
+					<code><pre><span class="n">surface</span>.<span class="p ref">causeEvent</span>(<span class="s">'click'</span>, <span class="c">this</span><span class="n">.events</span>);</pre></code>
+					<code><pre><span class="p">onclick</span>(<span class="n">event</span>) {
 	<span class="x">// handle click</span>
 }</pre></code>
 				</div>
