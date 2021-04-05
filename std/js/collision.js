@@ -13,21 +13,22 @@ export function collideCircle(a, b) {
 
 export function collideRectAndCircle(a, b) {
 	const [rect, circle] = a instanceof Shape.Rect ? [a, b] : [b, a];
-	const dx = Math.abs(circle.x - rect.x);
-	const dy = Math.abs(circle.y - rect.y);
-	if(dx > rect.shape.width / 2 + circle.radius) {
-		return false;
+	let x = circle.x;
+	let y = circle.y;
+	if(circle.x < rect.x) {
+		x = rect.x;
 	}
-	if(dy > rect.shape.height / 2 + circle.radius) {
-		return false;
+	else if(circle.x > rect.x + rect.shape.width) {
+		x = rect.x + rect.shape.width;
 	}
-	if(dx < rect.shape.width / 2) {
-		return true;
+	if(circle.y < rect.y) {
+		y = rect.y;
 	}
-	if(dy < rect.shape.height / 2) {
-		return true;
+	else if(circle.y > rect.y + rect.shape.height) {
+		y = rect.y + rect.shape.height;
 	}
-	return (dx - rect.shape.width / 2) ** 2 + (dy - rect.shape.height / 2) ** 2 < circle.radius ** 2;
+	const distance = Math.sqrt((circle.x - x) ** 2 + (circle.y - y) ** 2);
+	return distance <= circle.shape.radius;
 }
 
 export function collidePoint(object, point) {
