@@ -1,4 +1,4 @@
-import { scaleCanvas } from './util.js';
+import { scaleCanvas } from './util/canvas.js';
 
 export class Game {
 	constructor(width, height, { fps } = {}) {
@@ -10,8 +10,12 @@ export class Game {
 		scaleCanvas(this.canvas, this.width, this.height);
 		this.g = this.canvas.getContext('2d');
 		this.events = [];
+		this.sprites = [];
 	}
-	start() {
+	async start() {
+		for(const sprite of this.sprites) {
+			await sprite.load();
+		}
 		requestAnimationFrame(this.loop.bind(this));
 		this.update();
 		this.render(this.g);
@@ -45,5 +49,8 @@ export class Game {
 	}
 	bindEvent(element, type) {
 		element['on' + type] = event => this.events.push(event);
+	}
+	loadSprite(sprite) {
+		this.sprites.push(sprite);
 	}
 }
