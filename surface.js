@@ -1,3 +1,5 @@
+import { Shape } from './shape.js';
+
 export class Surface {
 	constructor(x, y, shape) {
 		this.x = x;
