@@ -1,5 +1,5 @@
 import Sprite from './sprite.js';
-import { scaleCanvas } from 'https://git.typable.dev/std/js/canvas.js';
+import { scaleCanvas } from '../util/canvas.js';
 
 export default class Spritesheet extends Sprite {
 	constructor(path, size) {
