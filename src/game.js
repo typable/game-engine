@@ -1,6 +1,7 @@
+import GameEngine from './game-engine.js';
 import { scaleCanvas } from './util/canvas.js';
 
-export class Game {
+export default class Game {
 	constructor(width, height, { fps } = {}) {
 		this.width = width || 900;
 		this.height = height || 600;
@@ -9,12 +10,17 @@ export class Game {
 		this.canvas = document.createElement('canvas');
 		scaleCanvas(this.canvas, this.width, this.height);
 		this.g = this.canvas.getContext('2d');
+		this.g.imageSmoothingEnabled = false;
 		this.events = [];
 		this.sprites = [];
+		GameEngine.instance = this;
 	}
 	async start() {
 		for(const sprite of this.sprites) {
 			await sprite.load();
+		}
+		if(this.onspriteload) {
+			this.onspriteload();
 		}
 		requestAnimationFrame(this.loop.bind(this));
 		this.update();
@@ -33,7 +39,7 @@ export class Game {
 			}
 			this.update();
 			this.render(this.g);
-			this.events.length = 0;
+			this.events = [];
 		}
 	}
 	update() {
@@ -46,6 +52,7 @@ export class Game {
 		this.width = width;
 		this.height = height;
 		scaleCanvas(this.canvas, this.width, this.height);
+		this.g.imageSmoothingEnabled = false;
 	}
 	bindEvent(element, type) {
 		element['on' + type] = event => this.events.push(event);
