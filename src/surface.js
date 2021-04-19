@@ -1,6 +1,6 @@
-import { Shape } from './shape.js';
+import Shape from './shape.js';
 
-export class Surface {
+export default class Surface {
 	constructor(x, y, shape) {
 		this.x = x;
 		this.y = y;
