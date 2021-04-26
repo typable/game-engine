@@ -11,4 +11,6 @@ class Circle {
 	}
 }
 
-export const Shape = { Rect, Circle };
+const Shape = { Rect, Circle };
+
+export default Shape;

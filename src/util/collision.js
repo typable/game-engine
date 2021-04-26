@@ -1,4 +1,4 @@
-import { Shape } from './shape.js';
+import Shape from '../shape.js';
 
 export function collideRect(a, b) {
 	return a.x < b.x + b.shape.width && a.x + a.shape.width > b.x
